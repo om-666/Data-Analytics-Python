@@ -49,6 +49,12 @@ print(df_no_outliers)
 print(df_no_outliers.shape)
 
 # Display histogram with KDE False
-print("Displaying histogram with KDE False")
-sns.histplot(df_no_outliers.Height,kde=True)
-plt.savefig("After Remove_Outliear .png")
+# print("Displaying histogram with KDE False")
+# sns.histplot(df_no_outliers.Height,kde=True)
+# plt.savefig("After Remove_Outliear .png")
+df['Zscore']=(df.Height - df.Height.mean())/std_dev
+print(df.head())
+df_NoOutliers_Zscore=df[(df.Zscore<=3) & (df.Zscore>=-3)]
+print(df_NoOutliers_Zscore.shape)
+# Outlier is Removed And Sve it in Excel Sheet 
+df_NoOutliers_Zscore.to_excel("Filtereddata.xlsx",index=False)
